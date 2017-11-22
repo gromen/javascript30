@@ -64,7 +64,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      border: 1px solid red;
+      /* border: 1px solid red; */
     }
 
     .panel p {
@@ -88,11 +88,20 @@
     }
 
     .panel.open {
+      flex: 5;
       font-size:40px;
+
+    }
+
+    .panel.open p:first-child {
+      transform: translateY(0%);
+    }
+
+    .panel.open p:last-child {
+      transform: translateY(0%);
     }
 
   </style>
-
 
   <div class="panels">
     <div class="panel panel1">
@@ -123,12 +132,14 @@
   </div>
 
   <script>
-    const panel = document.querySelector('.panel');
-    const panelText = panel.querySelector('p');
+    const panels = document.querySelectorAll('.panel');
 
-    panel.addEventListener('click', function () {
-      this.classList.toggle('open-active');
-    })
+    function toggleOpen() {
+      this.classList.toggle('open');
+    }
+
+    panels.forEach(panel => panel.addEventListener('click', toggleOpen));
+
   </script>
 
 
