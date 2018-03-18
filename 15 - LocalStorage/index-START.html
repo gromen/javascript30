@@ -40,8 +40,7 @@
             <input type="text" name="item" placeholder="Item Name" required>
             <input type="submit" value="+ Add Item">
         </form>
-        <button class="check">check all</button>
-        <button class="uncheck">uncheck all</button>
+        <button>check all</button>
     </div>
 
     <script>
@@ -61,6 +60,7 @@
             items.push(item);
 
             localStorage.setItem('items', JSON.stringify(items));
+            populateList(items, itemsList);
 
             this.reset()
         }
@@ -78,30 +78,46 @@
 
         function toggleDone (e) {
             if (!e.target.matches('input')) return;
+
+            console.log('toggle');
             const el = e.target;
             const index = el.dataset.index;
 
             items[index].done = !items[index].done;
 
+            btn.innerHTML = 'uncheck all';
+
             localStorage.setItem('items', JSON.stringify(items));
 
-            // populateList(items, itemsList);
+            populateList(items, itemsList);
         }
 
-        const btn = document.querySelectorAll('button');
+        const btn = document.querySelector('button');
 
-        function checkAll(e) {
-            const el = e.target;
+        function toggleCheck(e) {
+            btn.innerHTML = 'check all';
 
-            console.log(e.target.classList.contain('check'));
+            items.forEach((element, index) => {
+                if (!element.done) {
+                    element.done = true;
+                    btn.innerHTML = 'check all';
+                    return;
+                }
+
+                btn.innerHTML = 'uncheck all';
+                element.done = false;
+            });
+
+
+            localStorage.setItem('items', JSON.stringify(items));
+
+            populateList(items, itemsList);
         }
 
         addItems.addEventListener('submit', addItem);
         itemsList.addEventListener('click', toggleDone);
 
-        btn.forEach(input => {
-            this.addEventListener('click', checkAll);
-        })
+        btn.addEventListener('click', toggleCheck);
 
         populateList(items, itemsList);
 
