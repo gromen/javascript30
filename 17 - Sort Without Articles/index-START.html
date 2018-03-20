@@ -10,7 +10,7 @@
     body {
       margin: 0;
       font-family: sans-serif;
-      background: url("https://source.unsplash.com/nDqA4d5NL0k/2000x2000");
+      background: url("https://picsum.photos/2000/2000");
       background-size: cover;
       display: flex;
       align-items: center;
@@ -46,6 +46,11 @@
 <script>
 const bands = ['The Plot in You', 'The Devil Wears Prada', 'Pierce the Veil', 'Norma Jean', 'The Bled', 'Say Anything', 'The Midway State', 'We Came as Romans', 'Counterparts', 'Oh, Sleeper', 'A Skylit Drive', 'Anywhere But Here', 'An Old Dog'];
 
+const newBands = bands.sort((a, b) => {
+  return a > b;
+})
+
+console.log(newBands);
 
 </script>
 
