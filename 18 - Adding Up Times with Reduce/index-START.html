@@ -6,7 +6,7 @@
 </head>
 <body>
   <ul class="videos">
-    <li data-time="5:43">
+    <li data-time="5:50">
       Video 1
     </li>
     <li data-time="2:33">
@@ -24,7 +24,7 @@
     <li data-time="6:56">
       Video 6
     </li>
-    <li data-time="3:46">
+    <li data-time="0:46">
       Video 7
     </li>
     <li data-time="5:25">
@@ -174,7 +174,7 @@
     <li data-time="12:39">
       Video 56
     </li>
-    <li data-time="1:56">
+    <li data-time="1:51">
       Video 57
     </li>
     <li data-time="4:04">
@@ -182,6 +182,26 @@
     </li>
   </ul>
 <script>
+
+  const nodes = [...document.querySelectorAll('[data-time]')];
+
+  const sec = nodes
+    .map(node => node.dataset.time)
+    .map(elCode => {
+      const [mins, secs] = elCode.split(':').map(parseFloat);
+      return (mins * 60) + secs;
+    })
+    .reduce((x, y) => x + y);
+
+  let secLeft = sec;
+  const hours = Math.floor(secLeft / 3600);
+
+  secLeft = sec % 3600;
+
+  const mins = Math.floor(secLeft / 60);
+  secLeft = secLeft % 60;
+  console.log(hours, mins, secLeft);
+
 </script>
 </body>
 </html>
